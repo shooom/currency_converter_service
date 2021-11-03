@@ -18,4 +18,8 @@ public class ExRateLatest extends ExRateBase {
         }
         return buf.toString();
     }
+
+    public Map<String, String> getRates() {
+        return this.rates;
+    }
 }

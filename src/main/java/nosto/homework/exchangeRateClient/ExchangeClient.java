@@ -1,5 +1,7 @@
 package nosto.homework.exchangeRateClient;
 
+import nosto.homework.exchangeRateClient.dto.ExRateLatest;
+import nosto.homework.exchangeRateClient.dto.RateContainer;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -14,10 +16,10 @@ public class ExchangeClient {
     private final String ACCESS_KEY_NAME = "access_key";
 
     private final MessageParser parser = new MessageParser();
-
     private final OkHttpClient client = new OkHttpClient();
 
-    public void getLatestRate(String from, String to) throws IOException {
+    public RateContainer getLatestRate(String from, String to) throws IOException {
+        RateContainer result;
         var url = base()
                 .addEncodedPathSegment("latest")
                 .addEncodedQueryParameter("base", from)
@@ -30,8 +32,11 @@ public class ExchangeClient {
                 throw new IOException("Unexpected code" + response);
             }
 
-            System.out.println(parser.parseLatest(response.body()).toString());
+            ExRateLatest latest = parser.parseLatest(response.body());
+            System.out.println(latest.toString());
+            result = new RateContainer(from, to, latest.getRates().get(to));
         }
+            return result;
     }
 
     public void loadSymbols() throws Exception {
