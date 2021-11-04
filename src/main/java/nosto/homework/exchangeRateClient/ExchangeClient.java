@@ -33,7 +33,8 @@ public class ExchangeClient {
             }
 
             ExRateLatest latest = parser.parseLatest(response.body());
-            System.out.println(latest.toString());
+
+            System.out.println(latest);
             result = new RateContainer(from, to, latest.getRates().get(to));
         }
             return result;

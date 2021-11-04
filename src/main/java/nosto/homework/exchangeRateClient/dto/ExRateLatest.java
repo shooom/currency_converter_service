@@ -8,6 +8,10 @@ public class ExRateLatest extends ExRateBase {
     String date;
     Map<String, String> rates;
 
+    public Map<String, String> getRates() {
+        return this.rates;
+    }
+
     @Override
     public String toString() {
         var buf = new StringBuffer();
@@ -17,9 +21,5 @@ public class ExRateLatest extends ExRateBase {
             buf.append("\n to " + key + " equals " + rates.get(key));
         }
         return buf.toString();
-    }
-
-    public Map<String, String> getRates() {
-        return this.rates;
     }
 }

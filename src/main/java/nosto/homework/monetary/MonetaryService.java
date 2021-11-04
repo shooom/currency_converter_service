@@ -1,4 +1,4 @@
-package nosto.homework.converter;
+package nosto.homework.monetary;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

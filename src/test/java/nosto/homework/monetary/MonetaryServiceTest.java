@@ -1,4 +1,4 @@
-package nosto.homework.converter;
+package nosto.homework.monetary;
 
 import org.junit.Before;
 import org.junit.Test;

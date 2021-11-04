@@ -1,11 +1,18 @@
 package nosto.homework.exchangeRateClient.dto;
 
 public class ExRateBase {
-    Boolean success;
-    ErrorBody error;
+    public Boolean success;
+    public ErrorBody error;
 
     public static class ErrorBody {
         String code;
         String info;
+
+        @Override
+        public String toString() {
+            return "Exchange rate API error "
+                    + code + ": \'"
+                    + info + "\'";
+        }
     }
 }
