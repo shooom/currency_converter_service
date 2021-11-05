@@ -1,5 +1,6 @@
 package nosto.homework.exchangeRateClient;
 
+import nosto.homework.common.InitParams;
 import nosto.homework.exchangeRateClient.dto.ExRateLatest;
 import nosto.homework.exchangeRateClient.dto.ExRateSymbols;
 import nosto.homework.exchangeRateClient.dto.RateContainer;
@@ -63,6 +64,8 @@ public class ExchangeClient {
     }
 
     private HttpUrl.Builder base() {
-        return HttpUrl.parse(EXCHANGE_URL).newBuilder().addEncodedQueryParameter(ACCESS_KEY_NAME, ACCESS_KEY);
+        return HttpUrl
+                .parse(InitParams.EX_RATE_API_URL).newBuilder()
+                .addEncodedQueryParameter(ACCESS_KEY_NAME, InitParams.EX_RATE_ACCESS_KEY);
     }
 }
