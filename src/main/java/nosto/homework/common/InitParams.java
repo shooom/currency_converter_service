@@ -7,14 +7,6 @@ public class InitParams {
     public static int CONVERTER_APP_PORT;
 
     static {
-        EX_RATE_API_URL = System.getenv("EX_RATE_API_URL") != null
-                ? System.getenv("EX_RATE_API_URL")
-                : null;
-        if (EX_RATE_API_URL == null) {
-            System.err.println("Add EX_RATE_API_URL param to ENV");
-            System.exit(1);
-        }
-
         EX_RATE_ACCESS_KEY = System.getenv("EX_RATE_ACCESS_KEY") != null
                 ? System.getenv("EX_RATE_ACCESS_KEY")
                 : null;
@@ -22,6 +14,9 @@ public class InitParams {
             System.err.println("Add EX_RATE_ACCESS_KEY to ENV");
             System.exit(1);
         }
+        EX_RATE_API_URL = System.getenv("EX_RATE_API_URL") != null
+                ? System.getenv("EX_RATE_API_URL")
+                : "http://api.exchangeratesapi.io/v1/";
         CONVERTER_APP_PORT = System.getenv("CONVERTER_APP_PORT") != null
                 ? Integer.parseInt(System.getenv("CONVERTER_APP_PORT"))
                 : 8090;

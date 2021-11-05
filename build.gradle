@@ -1,26 +1,39 @@
 plugins {
     id 'java'
     id 'application'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
 }
 
 apply plugin : 'java'
+apply plugin: 'com.github.johnrengelman.shadow'
+ext {
+    javaMainClass = 'nosto.homework.ConverterApp'
+}
 
 repositories {
     mavenCentral()
 }
 
 group 'nosto.homework'
-version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.11
 
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
     implementation 'com.squareup.moshi:moshi:1.12.0'
-
     implementation 'io.javalin:javalin:4.1.1'
     implementation 'org.slf4j:slf4j-simple:1.7.30'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
 
     testImplementation 'junit:junit:4.12'
+}
+
+shadowJar {
+    archiveBaseName.set('ConverterApp-fat')
+    archiveClassifier.set('')
+    archiveVersion.set('')
+}
+
+application {
+    mainClassName = javaMainClass
 }
