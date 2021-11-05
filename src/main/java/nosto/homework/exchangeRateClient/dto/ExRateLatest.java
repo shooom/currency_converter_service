@@ -11,15 +11,4 @@ public class ExRateLatest extends ExRateBase {
     public Map<String, String> getRates() {
         return this.rates;
     }
-
-    @Override
-    public String toString() {
-        var buf = new StringBuffer();
-        buf.append("Convert from " + base + ": ");
-
-        for(String key : rates.keySet()) {
-            buf.append("\n to " + key + " equals " + rates.get(key));
-        }
-        return buf.toString();
-    }
 }

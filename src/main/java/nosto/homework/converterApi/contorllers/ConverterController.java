@@ -14,15 +14,15 @@ public class ConverterController {
     public static Handler convert = ctx -> {
         String from = ctx
                 .queryParamAsClass("source", String.class)
-                .check(param -> param != null && !param.equals(""), "Source value undefined")
+                .check(param -> param != null && !param.equals(""), "[source] param value undefined")
                 .get();
         String to = ctx
                 .queryParamAsClass("target", String.class)
-                .check(param -> param != null && !param.equals(""), "Target value undefined")
+                .check(param -> param != null && !param.equals(""), "[target] param value undefined")
                 .get();
         String amount = ctx
                 .queryParamAsClass("monetary", String.class)
-                .check(param -> param.matches("^\\d+$"), "Monetary must contains only digits")
+                .check(param -> param.matches("^\\d+$"), "[monetary] param must contains only digits")
                 .get();
 
         ctx.json(converterService.convert(from, to, amount));

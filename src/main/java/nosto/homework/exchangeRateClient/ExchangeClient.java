@@ -1,7 +1,9 @@
 package nosto.homework.exchangeRateClient;
 
 import nosto.homework.exchangeRateClient.dto.ExRateLatest;
+import nosto.homework.exchangeRateClient.dto.ExRateSymbols;
 import nosto.homework.exchangeRateClient.dto.RateContainer;
+import nosto.homework.exchangeRateClient.exceptinos.ExRateClientException;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -28,11 +30,13 @@ public class ExchangeClient {
         var request = new Request.Builder().url(url).build();
 
         try(Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code" + response);
-            }
-
             ExRateLatest latest = parser.parseLatest(response.body());
+
+            if (!response.isSuccessful()) {
+                if (latest.error != null) {
+                    throw new ExRateClientException(latest.error.code, latest.error.message);
+                }
+            }
 
             System.out.println(latest);
             result = new RateContainer(from, to, latest.getRates().get(to));
@@ -46,11 +50,15 @@ public class ExchangeClient {
                 .build();
         var request = new Request.Builder().url(url).build();
 
-        try (Response response = client.newCall(request).execute()){
+        try (Response response = client.newCall(request).execute()) {
+            ExRateSymbols symbols = parser.parseSymbols(response.body());
+
             if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code" + response);
+                if (symbols.error != null) {
+                    throw new ExRateClientException(symbols.error.code, symbols.error.message);
+                }
             }
-            System.out.println(parser.parseSymbols(response.body()).toString());
+            System.out.println(symbols.toString());
         }
     }
 

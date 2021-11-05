@@ -5,14 +5,12 @@ public class ExRateBase {
     public ErrorBody error;
 
     public static class ErrorBody {
-        String code;
-        String info;
+        public String code;
+        public String message;
 
         @Override
         public String toString() {
-            return "Exchange rate API error "
-                    + code + ": \'"
-                    + info + "\'";
+            return code + ": \'" + message + "\'";
         }
     }
 }

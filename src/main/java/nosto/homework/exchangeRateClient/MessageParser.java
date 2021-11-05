@@ -12,7 +12,6 @@ public class MessageParser {
     private final Moshi moshi = new Moshi.Builder().build();
     private final JsonAdapter<ExRateSymbols> symbolsAdapter = moshi.adapter(ExRateSymbols.class);
     private final JsonAdapter<ExRateLatest> latestAdapter = moshi.adapter(ExRateLatest.class);
-
     public ExRateSymbols parseSymbols(ResponseBody body) throws IOException {
         return symbolsAdapter.fromJson(body.source());
     }

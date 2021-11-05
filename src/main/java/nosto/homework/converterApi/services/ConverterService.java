@@ -6,6 +6,7 @@ import nosto.homework.converterApi.exceptions.FreePlanBaseCurrencyException;
 import nosto.homework.exchangeRateClient.ExchangeClient;
 import nosto.homework.exchangeRateClient.dto.RateContainer;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 
 import static nosto.homework.common.ConverterConstants.FREE_PLAN_BASE_CURRENCY;
@@ -31,7 +32,7 @@ public class ConverterService {
             RateContainer rateObj = client.getLatestRate(from, to);
             BigDecimal convertedAmount = monetaryService.convert(amount, rateObj.getRate().toString());
             return new ConverterDto(from, to, rateObj.getRate().toString(), amount, convertedAmount.toString());
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.out.println("Unexpected error: " + ex.getMessage());
         }
         return result;
